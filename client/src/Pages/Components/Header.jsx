@@ -46,8 +46,8 @@ const Header = () => {
     const checkAuth = async () => {
       try {
         const res = await axios.get(API + "auth", { withCredentials: true });
-        Setuser(res.data.username);
-        Setuserinfo(res.data);
+        Setuser(res?.data.username);
+        Setuserinfo(res?.data);
       } catch (e) {
         Setmsg(e?.response.data);
       }
@@ -56,15 +56,21 @@ const Header = () => {
   }, [user]);
 
   const logout = async () => {
-    const res = await axios.post(
-      API + "logout",
-      {},
-      {
-        withCredentials: true,
+    try {
+      const res = await axios.post(
+        API + "logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      if (res.status == 201) {
+        Setuser(null);
+        Setuserinfo(null);
       }
-    );
-    Setuser(null);
-    Setuserinfo(null);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (

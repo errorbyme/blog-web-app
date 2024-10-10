@@ -61,8 +61,8 @@ const ProfilePage = () => {
         const authres = await axios.get(API + "auth", {
           withCredentials: true,
         });
-        Setuser(authres.data.username);
-        Setuserinfo(authres.data);
+        Setuser(authres?.data.username);
+        Setuserinfo(authres?.data);
         Setmsg("");
       }
     } catch (e) {
@@ -90,8 +90,8 @@ const ProfilePage = () => {
         const authres = await axios.get(API + "auth", {
           withCredentials: true,
         });
-        Setuser((prevUser) => authres.data.username);
-        Setuserinfo((prevInfo) => authres.data);
+        Setuser((prevUser) => authres?.data.username);
+        Setuserinfo((prevInfo) => authres?.data);
         Setshoweditbox(false);
         Setmsg("");
       }
