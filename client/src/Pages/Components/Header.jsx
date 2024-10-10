@@ -56,10 +56,13 @@ const Header = () => {
   }, [user]);
 
   const logout = async () => {
-    const res = await axios.get(API + "logout", {
-      withCredentials: true,
-    });
-
+    const res = await axios.post(
+      API + "logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     Setuser(null);
     Setuserinfo(null);
   };

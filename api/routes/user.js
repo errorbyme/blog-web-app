@@ -140,7 +140,7 @@ router.get("/auth", (req, res) => {
   return res.json(response);
 });
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   res.clearCookie("token").status(201).json("ok");
 });
 
