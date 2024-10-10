@@ -67,6 +67,7 @@ const Header = () => {
       if (res.status == 201) {
         Setuser(null);
         Setuserinfo(null);
+        console.log("Logged out successfully");
       }
     } catch (error) {
       console.log(error.message);

@@ -141,7 +141,9 @@ router.get("/auth", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
+  console.log("initial");
   res.clearCookie("token", { path: "/" }); // Ensure path matches when setting the cookie
+  console.log("after");
   return res.status(201).json("ok");
 });
 
