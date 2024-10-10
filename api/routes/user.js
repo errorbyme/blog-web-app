@@ -111,7 +111,11 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const token = await User.matchPasswordAndGenerateToken(username, password);
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true, // Helps prevent cross-site scripting attacks
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      sameSite: "None", // Adjust based on your needs
+    });
     res.json({ message: "Login successful" });
   } catch (e) {
     if (e.message === "user not found" || e.message === "password incorrect")

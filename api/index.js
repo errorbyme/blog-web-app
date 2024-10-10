@@ -24,6 +24,10 @@ app.use(userRouter);
 app.use(blogRouter);
 app.use(commentRouter);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the API!");
+});
+
 app.listen(PORT, () => console.log("Server started at", PORT));
 
 // mongodb+srv://blog:HJdsIuc1rIYd5bjq@cluster0.audua.mongodb.net/
