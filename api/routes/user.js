@@ -40,9 +40,9 @@ router.put("/pfpupdate", upload.single("pfp"), async (req, res) => {
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "None", // Adjust based on your needs
     });
-    res.status(201).json({ message: "pfp updated" });
+    return res.status(201).json({ message: "pfp updated" });
   } catch (e) {
-    res.status(500).json({ message: "Internal server error." });
+    return res.status(500).json({ message: "Internal server error." });
   }
 });
 router.put("/profileupdate", async (req, res) => {
@@ -109,9 +109,9 @@ router.post("/register", upload.single("file"), async (req, res) => {
       password: bcrypt.hashSync(password, salt),
       pfp: "pfpuploads/" + image,
     });
-    res.status(201).json({ message: "Registration successful" });
+    return res.status(201).json({ message: "Registration successful" });
   } catch (e) {
-    res.status(500).json({ message: "Internal server error." });
+    return res.status(500).json({ message: "Internal server error." });
   }
 });
 
@@ -141,7 +141,7 @@ router.get("/auth", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("token").status(201).json("ok");
+  return res.clearCookie("token").status(201).json("ok");
 });
 
 router.delete("/user", async (req, res) => {
