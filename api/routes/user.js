@@ -74,9 +74,9 @@ router.put("/profileupdate", async (req, res) => {
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "None", // Adjust based on your needs
     });
-    res.status(201).json({ message: "profile updated" });
+    return res.status(201).json({ message: "profile updated" });
   } catch (e) {
-    res.status(500).json({ message: "Internal server error." });
+    return res.status(500).json({ message: "Internal server error." });
   }
 });
 
@@ -124,7 +124,7 @@ router.post("/login", async (req, res) => {
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "None", // Adjust based on your needs
     });
-    res.json({ message: "Login successful" });
+    return res.json({ message: "Login successful" });
   } catch (e) {
     if (e.message === "user not found" || e.message === "password incorrect")
       return res.status(400).json({ message: e.message });
@@ -141,7 +141,8 @@ router.get("/auth", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  return res.clearCookie("token").status(201).json("ok");
+  res.clearCookie("token");
+  return res.status(201).json("ok");
 });
 
 router.delete("/user", async (req, res) => {
