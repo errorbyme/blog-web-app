@@ -21,7 +21,7 @@ export const ContextProvider = ({ children }) => {
     return String(day + " " + month + ", " + year);
   };
 
-  const API = "https://blog-backend-9nid.onrender.com/";
+  const API = "https://blog-web-app-p60z.onrender.com/";
   // const API = "http://localhost:9999/";
 
   return (
