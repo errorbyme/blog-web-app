@@ -143,8 +143,8 @@ router.get("/auth", (req, res) => {
 
 router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
-  res.clearCookie("token", { path: "/" }); // Clear the cookie
   res.cookie("token", "", { path: "/", expires: new Date(0) });
+  res.clearCookie("token", { path: "/" }); // Clear the cookie
   console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
   return res.status(201).json("ok");
 });
