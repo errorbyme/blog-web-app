@@ -141,6 +141,8 @@ router.get("/auth", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
+  console.log("yes");
+
   res.clearCookie("token");
   return res.status(201).json("ok");
 });
