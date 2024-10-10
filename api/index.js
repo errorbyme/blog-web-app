@@ -11,7 +11,6 @@ import dotenv from "dotenv";
 const app = express();
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI, {
-  useUnifiedTopology: true,
   ssl: true,
 });
 const PORT = process.env.PORT || 9999;
