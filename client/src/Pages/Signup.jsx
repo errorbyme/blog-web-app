@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMyContext } from "./ContextAPI/ContextApi";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [username, Setusername] = useState("");
@@ -27,7 +28,13 @@ const Signup = () => {
     formData.append("fullname", fullname);
     if (file) formData.append("file", file);
     try {
-      const response = await axios.post(API + "register", formData);
+      const response = await toast.promise(
+        axios.post(API + "register", formData),
+        {
+          pending: "Please wait../",
+          success: "👌",
+        }
+      );
       if (response.status === 201) redirect("/signin");
     } catch (e) {
       if (e?.response) {

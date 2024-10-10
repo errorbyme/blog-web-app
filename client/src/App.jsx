@@ -5,6 +5,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useMyContext } from "./Pages/ContextAPI/ContextApi";
 import GoBackButton from "./Pages/Components/GoBackButton";
 import SearchPage from "./Pages/Components/SearchPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const location = useLocation();
@@ -18,6 +20,7 @@ const App = () => {
   return (
     <>
       <Header />
+      <ToastContainer autoClose={3000} closeOnClick />
       <SearchPage />
       <div className="container-fluid">
         {!(location.pathname === "/") && <GoBackButton />}

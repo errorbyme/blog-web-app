@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useMyContext } from "./ContextAPI/ContextApi.jsx";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const [username, Setusername] = useState("");
@@ -18,13 +19,19 @@ const Signin = () => {
   const submitHandle = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        API + "login",
+      const response = await toast.promise(
+        axios.post(
+          API + "login",
+          {
+            username,
+            password,
+          },
+          { withCredentials: true }
+        ),
         {
-          username,
-          password,
-        },
-        { withCredentials: true }
+          pending: "Please wait../",
+          success: "👌",
+        }
       );
       if (response.status === 200) redirect("/");
       Setuser(null);

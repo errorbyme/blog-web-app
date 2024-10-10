@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import TextEditor from "./Components/TextEditor";
 import TagsInput from "./Components/TagsInput";
+import { toast } from "react-toastify";
 
 const EditBlog = () => {
   const [title, settitle] = useState("");
@@ -57,9 +58,15 @@ const EditBlog = () => {
     formdata.append("id", id);
     if (file) formdata.append("coverImageURL", file);
     try {
-      const res = await axios.put(API + "blog", formdata, {
-        withCredentials: true,
-      });
+      const res = toast.promise(
+        await axios.put(API + "blog", formdata, {
+          withCredentials: true,
+        }),
+        {
+          pending: "Updating the blog../",
+          success: "👌",
+        }
+      );
       if (res.status == 201) redirect(`/blog/${id}`);
     } catch (e) {
       if (e?.response) {

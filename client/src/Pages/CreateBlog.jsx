@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useMyContext } from "./ContextAPI/ContextApi.jsx";
 import TagsInput from "./Components/TagsInput.jsx";
+import { toast } from "react-toastify";
 
 const CreateBlog = () => {
   const [title, settitle] = useState("");
@@ -37,7 +38,13 @@ const CreateBlog = () => {
     formdata.append("coverImageURL", file);
 
     try {
-      const res = await axios.post(API + "createblog", formdata);
+      const res = await toast.promise(
+        axios.post(API + "createblog", formdata),
+        {
+          pending: "publishing the blog../",
+          success: "👌",
+        }
+      );
       if (res.status === 201) {
         redirect("/");
         Settags([]);

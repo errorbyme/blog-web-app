@@ -3,6 +3,7 @@ import { useMyContext } from "./ContextAPI/ContextApi.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { RiEditCircleFill } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const { API, userinfo, user, Setuser, Setuserinfo, Setmsg } = useMyContext();
@@ -47,9 +48,15 @@ const ProfilePage = () => {
     if (pfp) formdata.append("pfp", pfp);
 
     try {
-      const res = await axios.put(API + "pfpupdate", formdata, {
-        withCredentials: true,
-      });
+      const res = await toast.promise(
+        axios.put(API + "pfpupdate", formdata, {
+          withCredentials: true,
+        }),
+        {
+          pending: "Updating profile pict../",
+          success: "👌",
+        }
+      );
       if (res.status == 201) {
         const authres = await axios.get(API + "auth", {
           withCredentials: true,
@@ -68,10 +75,16 @@ const ProfilePage = () => {
       return handleCancel();
     }
     try {
-      const res = await axios.put(
-        API + "profileupdate",
-        { fullname, username },
-        { withCredentials: true }
+      const res = await toast.promise(
+        axios.put(
+          API + "profileupdate",
+          { fullname, username },
+          { withCredentials: true }
+        ),
+        {
+          pending: "Updating profile info../",
+          success: "👌",
+        }
       );
       if (res.status === 201) {
         const authres = await axios.get(API + "auth", {

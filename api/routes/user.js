@@ -35,7 +35,11 @@ router.put("/pfpupdate", upload.single("pfp"), async (req, res) => {
     user.pfp = "pfpuploads/" + img;
     await user.save();
     const newToken = createTokenForUser(user);
-    res.cookie("token", newToken, { httpOnly: true });
+    res.cookie("token", newToken, {
+      httpOnly: true, // Helps prevent cross-site scripting attacks
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      sameSite: "None", // Adjust based on your needs
+    });
     res.status(201).json({ message: "pfp updated" });
   } catch (e) {
     res.status(500).json({ message: "Internal server error." });
@@ -65,7 +69,11 @@ router.put("/profileupdate", async (req, res) => {
     await user.save();
 
     const newToken = createTokenForUser(user);
-    res.cookie("token", newToken, { httpOnly: true });
+    res.cookie("token", newToken, {
+      httpOnly: true, // Helps prevent cross-site scripting attacks
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      sameSite: "None", // Adjust based on your needs
+    });
     res.status(201).json({ message: "profile updated" });
   } catch (e) {
     res.status(500).json({ message: "Internal server error." });
