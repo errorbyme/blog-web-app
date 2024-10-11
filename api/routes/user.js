@@ -122,6 +122,7 @@ router.post("/login", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true, // Helps prevent cross-site scripting attacks
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      sameSite: "Lax",
       path: "/",
     });
     return res.json({ message: "Login successful" });
