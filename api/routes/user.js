@@ -122,7 +122,7 @@ router.post("/login", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "None",
+      sameSite: "strict",
       path: "/",
     });
 
@@ -134,20 +134,18 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/logout", (req, res) => {
+  console.log("Initial cookies:", req.cookies); // Log current cookies
+  res.clearCookie("token"); // Clear the cookie
+  console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
+  return res.status(201).json("ok");
+});
 router.get("/auth", (req, res) => {
   const { token } = req.cookies;
   if (!token) return res.json({ message: "Unauthorized" });
   const response = validateToken(token);
   if (!response) return res.json({ message: "Unauthorized" });
   return res.json(response);
-});
-
-router.post("/logout", (req, res) => {
-  console.log("Initial cookies:", req.cookies); // Log current cookies
-  res.cookie("token", "", { expires: new Date(0), path: "/" });
-  res.clearCookie("token", { path: "/", httpOnly: true, secure: true }); // Clear the cookie
-  console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
-  return res.status(201).json("ok");
 });
 
 router.delete("/user", async (req, res) => {
