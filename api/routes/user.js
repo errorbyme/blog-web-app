@@ -134,7 +134,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
   res.clearCookie("token", { path: "/" }); 
   console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing

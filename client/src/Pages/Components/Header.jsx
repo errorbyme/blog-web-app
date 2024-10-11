@@ -57,9 +57,13 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      const res = await axios.get(API + "logout", {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        API + "logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       if (res.status == 201) {
         Setuser(null);
         Setuserinfo(null);
