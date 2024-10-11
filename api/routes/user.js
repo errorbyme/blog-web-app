@@ -138,11 +138,17 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
-  res.clearCookie("token", {
+  res.cookie("token", "haha", {
+    httpOnly: true, // Helps prevent cross-site scripting attacks
+    secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+    sameSite: "None", // Adjust based on your needs
     path: "/",
-    httpOnly: true, // Optional, but good practice
-    secure: process.env.NODE_ENV === "production",
   });
+  // res.clearCookie("token", {
+  //   path: "/",
+  //   httpOnly: true, // Optional, but good practice
+  //   secure: process.env.NODE_ENV === "production",
+  // });
   console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
   return res.status(201).json("ok");
 });

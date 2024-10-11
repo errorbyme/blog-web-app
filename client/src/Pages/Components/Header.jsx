@@ -55,7 +55,8 @@ const Header = () => {
     checkAuth();
   }, [user]);
 
-  const logout = async () => {
+  const logout = async (e) => {
+    e.preventDefault();
     try {
       const res = await axios.post(
         API + "logout",
