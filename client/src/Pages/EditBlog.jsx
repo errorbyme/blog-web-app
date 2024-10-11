@@ -67,9 +67,13 @@ const EditBlog = () => {
           success: "👌",
         }
       );
-      if (res.status == 201) return redirect(`/blog/${id}`);
+      if (res.status === 201) return redirect(`/blog/${id}`);
     } catch (e) {
-      Setmsg(e?.response?.data.message);
+      if (e?.response) {
+        Setmsg(e.response.data.message);
+      } else {
+        Setmsg("Unexpected server error");
+      }
     }
   };
   return (
