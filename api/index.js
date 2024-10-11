@@ -10,9 +10,11 @@ import dotenv from "dotenv";
 
 const app = express();
 dotenv.config();
-mongoose.connect(process.env.MONGODB_URI, {
-  ssl: true,
-});
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    ssl: true,
+  })
+  .then(() => console.log("connected to db"));
 const PORT = process.env.PORT || 9999;
 app.use(
   cors({

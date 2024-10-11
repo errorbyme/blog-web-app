@@ -138,12 +138,8 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
-  res.clearCookie("token", {
-    path: "/",
-    httpOnly: true, // Optional, but good practice
-    secure: process.env.NODE_ENV === "production",
-  });
-  console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
+  res.clearCookie("token", { path: "/" });
+  console.log("Response headers:", res.getHeaders()); // Log response headers
   return res.status(201).json("ok");
 });
 
