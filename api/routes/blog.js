@@ -37,7 +37,7 @@ router.post("/createblog", upload.single("coverImageURL"), async (req, res) => {
     });
     return res.status(201).json({ message: "Blog created successfully" });
   } catch (e) {
-    res.status(500).json({ message: "Internal server error." });
+    return res.status(500).json({ message: "Internal server error." });
   }
 });
 
@@ -110,8 +110,8 @@ router.put("/blog", upload.single("coverImageURL"), async (req, res) => {
       JSON.stringify(BlogDoc.createdBy) === JSON.stringify(userInfo._id);
 
     if (!isTrue)
-      return res.status(500).json({ message: "You are not the actual author" });
-    const upDateDoc = await BlogDoc.updateOne({
+      return res.status(400).json({ message: "You are not the actual author" });
+    await BlogDoc.updateOne({
       title,
       summary,
       content,
