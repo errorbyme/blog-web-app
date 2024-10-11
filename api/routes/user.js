@@ -137,20 +137,14 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  try {
-    const { token } = req.cookies;
-    if (!token) return res.status(400).json({ message: "Not authorized." });
-    console.log("Initial cookies:", req.cookies); // Log current cookies
-    res.clearCookie("token", {
-      path: "/",
-      httpOnly: true, // Optional, but good practice
-      secure: process.env.NODE_ENV === "production",
-    });
-    console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
-    return res.status(201).json("ok");
-  } catch (e) {
-    return res.status(400).json({ message: e.message });
-  }
+  console.log("Initial cookies:", req.cookies); // Log current cookies
+  res.clearCookie("token", {
+    path: "/",
+    httpOnly: true, // Optional, but good practice
+    secure: process.env.NODE_ENV === "production",
+  });
+  console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
+  return res.status(201).json("ok");
 });
 
 router.get("/auth", (req, res) => {
