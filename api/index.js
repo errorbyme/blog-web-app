@@ -14,7 +14,12 @@ mongoose.connect(process.env.MONGODB_URI, {
   ssl: true,
 });
 const PORT = process.env.PORT || 9999;
-app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
