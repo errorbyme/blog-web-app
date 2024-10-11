@@ -71,7 +71,7 @@ const Header = () => {
         console.log("Logged out successfully");
       }
     } catch (error) {
-      console.log(error.message);
+      Setmsg(error.message);
     }
   };
 
