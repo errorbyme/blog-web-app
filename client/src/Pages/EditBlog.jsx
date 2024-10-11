@@ -58,22 +58,18 @@ const EditBlog = () => {
     formdata.append("id", id);
     if (file) formdata.append("coverImageURL", file);
     try {
-      const res = toast.promise(
-        await axios.put(API + "blog", formdata, {
+      const resp = await toast.promise(
+        axios.put(API + "blog", formdata, {
           withCredentials: true,
         }),
         {
-          pending: "Updating the blog../",
+          pending: "updating the blog../",
           success: "👌",
         }
       );
-      if (res.status === 201) return redirect(`/blog/${id}`);
+      if (resp.status === 201) return redirect(`/blog/${id}`);
     } catch (e) {
-      if (e?.response) {
-        Setmsg(e.response.data.message);
-      } else {
-        Setmsg("Unexpected server error");
-      }
+      Setmsg(e?.response?.data.message);
     }
   };
   return (
