@@ -120,6 +120,9 @@ router.post("/login", async (req, res) => {
   try {
     const token = await User.matchPasswordAndGenerateToken(username, password);
     res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
       path: "/",
     });
 
@@ -141,7 +144,7 @@ router.get("/auth", (req, res) => {
 
 router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
-  res.clearCookie("token", { path: "/" }); // Clear the cookie
+  res.clearCookie("token", { path: "/", httpOnly: true, secure: true }); // Clear the cookie
   res.cookie("token", "", { expires: new Date(0), path: "/" });
   console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
   return res.status(201).json("ok");
