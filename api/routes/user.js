@@ -119,12 +119,9 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const token = await User.matchPasswordAndGenerateToken(username, password);
-    res.cookie("token", token, {
-      httpOnly: true, // Helps prevent cross-site scripting attacks
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-      sameSite: "Lax",
-      path: "/",
-    });
+    res.cookie("token", token);
+    console.log("this is token", token);
+
     return res.json({ message: "Login successful" });
   } catch (e) {
     if (e.message === "user not found" || e.message === "password incorrect")
@@ -143,8 +140,7 @@ router.get("/auth", (req, res) => {
 
 router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
-  res.cookie("token", "", { path: "/", expires: new Date(0) });
-  res.clearCookie("token", { path: "/" }); // Clear the cookie
+  res.clearCookie("token"); // Clear the cookie
   console.log("Cookies after clear attempt:", req.cookies); // Log again after clearing
   return res.status(201).json("ok");
 });
