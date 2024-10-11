@@ -120,9 +120,11 @@ router.post("/login", async (req, res) => {
   try {
     const token = await User.matchPasswordAndGenerateToken(username, password);
     res.cookie("token", token, {
+      httpOnly: false,
+      secure: false,
       sameSite: "None",
+      path: "/",
     });
-    console.log("this is token", token);
 
     return res.json({ message: "Login successful" });
   } catch (e) {
