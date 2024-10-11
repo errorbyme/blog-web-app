@@ -39,6 +39,7 @@ router.put("/pfpupdate", upload.single("pfp"), async (req, res) => {
       httpOnly: true, // Helps prevent cross-site scripting attacks
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "None", // Adjust based on your needs
+      path: "/",
     });
     return res.status(201).json({ message: "pfp updated" });
   } catch (e) {
@@ -73,6 +74,7 @@ router.put("/profileupdate", async (req, res) => {
       httpOnly: true, // Helps prevent cross-site scripting attacks
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "None", // Adjust based on your needs
+      path: "/",
     });
     return res.status(201).json({ message: "profile updated" });
   } catch (e) {
