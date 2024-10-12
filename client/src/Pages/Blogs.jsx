@@ -51,11 +51,12 @@ const Blogs = () => {
 
   useEffect(() => {
     Setblogs(unfilteredblogs);
-    Setcategory("All");
     if (searchValue === "") {
+      Setcategory("All");
       Setblogs(unfilteredblogs);
       return; // Early return to avoid further processing
     }
+    Setcategory("");
     SetcurrPage(1);
 
     const filteredBlogs = unfilteredblogs.filter((b) => {
@@ -79,7 +80,6 @@ const Blogs = () => {
   useEffect(() => {
     SetcurrPage(1);
     Setblogs(unfilteredblogs);
-    SetsearchValue("");
     if (category === "All") {
       SetsearchValue("");
       Setblogs(unfilteredblogs);
