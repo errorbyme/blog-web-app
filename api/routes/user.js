@@ -138,7 +138,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
-  res.clearCookie("token", { path: "/" });
+  res.clearCookie("token", { path: "/", maxAge: 0 });
   console.log("After cookie delete atempt Response headers:", res.getHeaders()); // Log response headers
   return res.status(201).json("ok");
 });
