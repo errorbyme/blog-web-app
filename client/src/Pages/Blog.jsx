@@ -10,12 +10,14 @@ import { FaComments } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
 import { BiSolidLike } from "react-icons/bi";
 import { IconButton, Tooltip } from "@mui/material";
+import Loading from "./Components/Loading";
 
 const Blog = () => {
   const params = useParams();
   const [isLiked, SetisLiked] = useState(false);
   const { API, userinfo, Setmsg, user } = useMyContext();
   const redirect = useNavigate();
+  const [isloader, Setisloader] = useState(true);
 
   const [blog, Setblog] = useState({});
   const id = params.id;
@@ -28,6 +30,8 @@ const Blog = () => {
         if (singleBlog.status === 201) Setblog(singleBlog.data);
       } catch (e) {
         if (e?.response) Setmsg(e.response.data.message);
+      } finally {
+        Setisloader(false);
       }
     };
     Blog();
@@ -64,6 +68,8 @@ const Blog = () => {
       if (e?.response) Setmsg(e.response.data.message);
     }
   };
+
+  if (isloader) return <Loading />;
 
   return (
     <div className="blog-page container">

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import TextEditor from "./Components/TextEditor";
 import TagsInput from "./Components/TagsInput";
 import { toast } from "react-toastify";
+import Loading from "./Components/Loading";
 
 const EditBlog = () => {
   const [title, settitle] = useState("");
@@ -12,6 +13,7 @@ const EditBlog = () => {
   const [file, setFile] = useState("");
   const [editorContent, setEditorContent] = useState("");
   const [tags, Settags] = useState([]);
+  const [isloader, Setisloader] = useState(true);
 
   const params = useParams();
 
@@ -39,6 +41,8 @@ const EditBlog = () => {
       } catch (e) {
         if (e?.response) console.log(e.response.data.message);
         console.log(e);
+      } finally {
+        Setisloader(false);
       }
     };
     Blog();
@@ -72,6 +76,7 @@ const EditBlog = () => {
       Setmsg(e?.response?.data.message);
     }
   };
+  if (isloader) return <Loading />;
   return (
     <div className="create-blog-page container">
       <input

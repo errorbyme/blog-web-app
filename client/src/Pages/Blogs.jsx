@@ -12,12 +12,13 @@ import {
 } from "@mui/material";
 import { FaArrowDown } from "react-icons/fa";
 import { FaFilter } from "react-icons/fa";
+import Loading from "./Components/Loading";
 
 const Blogs = () => {
-  const { API, searchValue, SetsearchValue } = useMyContext();
+  const { API, searchValue, SetsearchValue, Setmsg } = useMyContext();
   const [blogs, Setblogs] = useState([]);
   const [unfilteredblogs, Setunfilteredblogs] = useState([]);
-
+  const [isloader, Setisloader] = useState(true);
   // pagination
 
   const [currPage, SetcurrPage] = useState(1);
@@ -36,7 +37,9 @@ const Blogs = () => {
         Setblogs(allBlogs.data);
         Setunfilteredblogs(allBlogs.data);
       } catch (e) {
-        console.log(e);
+        Setmsg(e.message);
+      } finally {
+        Setisloader(false);
       }
     };
     getAllBlogs();
@@ -87,6 +90,8 @@ const Blogs = () => {
     );
     Setblogs(filteredBlogs);
   }, [category]);
+
+  if (isloader) return <Loading />;
 
   return (
     <div className="blogs-page container">

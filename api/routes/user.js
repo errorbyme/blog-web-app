@@ -137,7 +137,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  console.log("Initial cookies:", req.cookies); // Log current cookies
   res.clearCookie("token", {
     path: "/",
     httpOnly: false,
@@ -145,7 +144,6 @@ router.post("/logout", (req, res) => {
     secure: process.env.NODE_ENV === "production",
     sameSite: "None",
   });
-  console.log("After cookie delete atempt Response headers:", res.getHeaders()); // Log response headers
   return res.status(201).json("ok");
 });
 

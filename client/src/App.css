@@ -257,6 +257,7 @@ header nav img {
   transition: all 0.2ms;
   margin-left: auto;
 }
+
 /* Form-page */
 
 .form-page {
@@ -585,6 +586,15 @@ header nav img {
   left: 10px;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading img {
+  width: 100px;
+}
+
 /* media Queries */
 
 @media screen and (max-width: 800px) {
@@ -618,6 +628,9 @@ header nav img {
 @media screen and (max-width: 400px) {
   header {
     padding: 15px 2%;
+  }
+  .loading img {
+    width: 80px;
   }
   .search-box label,
   .search-box input {
