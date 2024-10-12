@@ -618,6 +618,13 @@ header nav img {
   .search-box input {
     font-size: 0.8rem;
   }
+  .search-box label,
+  .search-box input {
+    display: none;
+  }
+  .search-box .search-icon {
+    display: block;
+  }
   .blog-page .img {
     width: 100%;
   }
@@ -631,13 +638,6 @@ header nav img {
   }
   .loading img {
     width: 80px;
-  }
-  .search-box label,
-  .search-box input {
-    display: none;
-  }
-  .search-box .search-icon {
-    display: block;
   }
   .categories-btns .c-btn {
     font-size: 0.6rem;
