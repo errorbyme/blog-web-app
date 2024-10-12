@@ -80,8 +80,9 @@ const Blogs = () => {
   useEffect(() => {
     SetcurrPage(1);
     Setblogs(unfilteredblogs);
+    if (searchValue !== "" && category) SetsearchValue("");
+
     if (category === "All") {
-      SetsearchValue("");
       Setblogs(unfilteredblogs);
       return;
     }
