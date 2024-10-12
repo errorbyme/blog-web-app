@@ -27,10 +27,7 @@ const ProfilePage = () => {
       const res = await axios.delete(API + "user", {
         withCredentials: true,
       });
-      if (res.status == 201) {
-        await axios.get(API + "logout", {
-          withCredentials: true,
-        });
+      if (res.status === 201) {
         Setuser(null);
         Setuserinfo(null);
         redirect("/");
