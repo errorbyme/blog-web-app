@@ -24,9 +24,15 @@ const ProfilePage = () => {
     );
     if (!confirmDelete) return;
     try {
-      const res = await axios.delete(API + "user", {
-        withCredentials: true,
-      });
+      const res = await toast.promise(
+        axios.delete(API + "user", {
+          withCredentials: true,
+        }),
+        {
+          pending: "Terminating your Account/",
+          success: "Account Deleted successfully !!",
+        }
+      );
       if (res.status === 201) {
         Setuser(null);
         Setuserinfo(null);
