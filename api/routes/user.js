@@ -171,6 +171,13 @@ router.delete("/user", async (req, res) => {
     if (mycomments) await Comment.deleteMany({ commentBy: userInfo._id });
 
     await User.deleteOne({ _id: userInfo._id });
+    res.clearCookie("token", {
+      path: "/",
+      httpOnly: false,
+      maxAge: 0,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
+    });
     return res.status(201).json({ message: "Account deleted successfully." });
   } catch (e) {
     return res.status(500).json({ message: "Internal server error." });
