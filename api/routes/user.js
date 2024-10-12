@@ -74,7 +74,6 @@ router.put("/profileupdate", async (req, res) => {
       httpOnly: true, // Helps prevent cross-site scripting attacks
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "None", // Adjust based on your needs
-      domain: "https://blogifyyyy.netlify.app/",
       path: "/",
     });
     return res.status(201).json({ message: "profile updated" });
@@ -127,6 +126,7 @@ router.post("/login", async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "None",
       path: "/",
+      domain: "https://blogifyyyy.netlify.app",
     });
 
     return res.json({ message: "Login successful" });
@@ -140,7 +140,7 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
   console.log("Initial cookies:", req.cookies); // Log current cookies
   res.clearCookie("token", { path: "/" });
-  console.log("Response headers:", res.getHeaders()); // Log response headers
+  console.log("After cookie delete atempt Response headers:", res.getHeaders()); // Log response headers
   return res.status(201).json("ok");
 });
 
