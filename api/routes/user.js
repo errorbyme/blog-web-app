@@ -126,7 +126,6 @@ router.post("/login", async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "None",
       path: "/",
-      domain: "blogifyyyy.netlify.app",
     });
 
     return res.json({ message: "Login successful" });
