@@ -80,7 +80,11 @@ const Blogs = () => {
     SetcurrPage(1);
     Setblogs(unfilteredblogs);
     SetsearchValue("");
-    if (category === "All") return Setblogs(unfilteredblogs);
+    if (category === "All") {
+      SetsearchValue("");
+      Setblogs(unfilteredblogs);
+      return;
+    }
     const filteredBlogs = unfilteredblogs.filter(
       (b) =>
         b.categories &&
