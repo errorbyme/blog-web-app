@@ -371,6 +371,7 @@ header nav img {
 }
 .tag-input input {
   margin-bottom: 0;
+  padding-right: 15px;
 }
 
 .tag-input ul {
@@ -474,6 +475,19 @@ header nav img {
   margin-top: 0;
   background-color: transparent;
   color: white;
+}
+
+.tagsinput-group {
+  width: 100%;
+  position: relative;
+}
+.tagsinput-group button {
+  position: absolute;
+  right: 0;
+  padding: 3px 8px 0px;
+  top: 50%;
+  font-size: 0.8rem;
+  transform: translateY(-50%);
 }
 
 /* profile */

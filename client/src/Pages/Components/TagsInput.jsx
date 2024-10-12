@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CiCircleRemove } from "react-icons/ci";
+import { IoMdSend } from "react-icons/io";
 
 const TagsInput = ({ tags, Settags }) => {
   const [value, Setvalue] = useState("");
@@ -24,6 +25,10 @@ const TagsInput = ({ tags, Settags }) => {
       Setvalue("");
     }
   };
+  const addTagsbtn = (e) => {
+    Settags((prev) => [...prev, value.toString()]);
+    Setvalue("");
+  };
   const deleteTag = (id) => {
     const updatedArray = tags.filter((item, i) => i !== id);
     Settags(updatedArray);
@@ -40,14 +45,19 @@ const TagsInput = ({ tags, Settags }) => {
           </li>
         ))}
       </ul>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => Setvalue(e.target.value)}
-        onKeyDown={addTags}
-        placeholder="Catogories -> [Enter to add new tags]"
-        list="recommendations"
-      />
+      <div className="tagsinput-group">
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => Setvalue(e.target.value)}
+          onKeyDown={addTags}
+          placeholder="Catogories -> [Enter to add new tags]"
+          list="recommendations"
+        />
+        <button type="button" onClick={addTagsbtn} className="btn comment-btn">
+          <IoMdSend />
+        </button>
+      </div>
       <datalist id="recommendations">
         {recommendations.map((recommendation, index) => (
           <option key={index} value={recommendation} />
