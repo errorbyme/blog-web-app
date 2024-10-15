@@ -31,6 +31,8 @@ const Card = ({ b }) => {
     SetcommentsLength(comments.length);
   }, [comments]);
 
+  console.log(b.createdBy?.pfp);
+
   return (
     <div className="card">
       <div className="card-header">
